@@ -6,9 +6,9 @@ What is Origami?
 
 Features
 ======
-* Object-Graph-Mapping of annotated model classes based on Object Oriented Inheritance([src](http://goo.gl/93Auo))
+* Object-Graph-Mapping of annotated model classes based on Object Oriented Inheritance([src](http://goo.gl/tCAhS))
 * Supports for both the embedded OrientDB and the remote OrientDB
-* Enables to customize a id format of Model ([src](http://goo.gl/Ql7Fy))
+* Enables to customize the format of Model Id ([src](http://goo.gl/0ZNkB))
 * Only embedded OrienDB:
    * Enables to use the [OrientDB Studio](https://github.com/nuvolabase/orientdb/wiki/OrientDB-Studio)
    * Enables to make the database directory of the embedded OrientDB a zip file when your application has just started up.
@@ -40,20 +40,20 @@ At a command prompt, type the following commands:
          % cd origami-simple-app
          % play run
 
-There are basic usage in the source code of a [sample application](http://goo.gl/MhIHl). 
+There are basic usage in the source code of a [sample application](http://goo.gl/eWFr3). 
 
-* [Annotated model classes](http://goo.gl/s5Vje)
+* [Annotated model classes](http://goo.gl/tCAhS)
 
-* [Customizing id format](http://goo.gl/xHajA)
+* [Customizing id format](http://goo.gl/jXcsN)
 
-* [Application configuration: conf/application.conf](http://goo.gl/jUAyh)
+* [Application configuration: conf/application.conf](http://goo.gl/8Cqq3)
 
-* [Dependency settings: project/Build.scala](http://goo.gl/gTgBO)  
+* [Dependency settings: project/Build.scala](http://goo.gl/xbU9c)  
 
-* [Controller with transaction](http://goo.gl/HQLhK)
+* [Controller with transaction](http://goo.gl/AvNc5)
 
 ## Facade Class for OrientDB
-The com.wingnest.play2.origami.[GraphDB](http://goo.gl/1vS9Y) class is a Facade class.
+The com.wingnest.play2.origami.[GraphDB](http://goo.gl/XyUAA) class is a Facade class.
 
 * GraphDB.open()
 * GraphDB.close()
@@ -72,14 +72,14 @@ The com.wingnest.play2.origami.[GraphDB](http://goo.gl/1vS9Y) class is a Facade 
 
 ## Abstract Model classes
 
-* [com.wingnest.play2.origami.GraphVertexModel](http://goo.gl/MNV6d)
-* [com.wingnest.play2.origami.GraphEdgeModel](http://goo.gl/W2htm)
-* [com.wingnest.play2.origami.GraphModel](http://goo.gl/WIPUd)
+* [com.wingnest.play2.origami.GraphVertexModel](http://goo.gl/DVcsa)
+* [com.wingnest.play2.origami.GraphEdgeModel](http://goo.gl/EwGj9)
+* [com.wingnest.play2.origami.GraphModel](http://goo.gl/KJjLD)
 
 ## Annotatins for O/G mapping
 
 ### For Models
-####[@Index](http://goo.gl/j1ixJ)
+####[@Index](http://goo.gl/RiF1W)
 Defines one or more indexes.
 
   ex.:
@@ -94,7 +94,7 @@ Defines one or more indexes.
            ...
          }
 
-####[@CompositeIndex](http://goo.gl/G6mkc)
+####[@CompositeIndex](http://goo.gl/M1ej3)
 Defines one or more composite indexes.
 
   ex.:
@@ -109,7 +109,7 @@ Defines one or more composite indexes.
             ...
         }     
 
-####[@SmartDate](http://goo.gl/ta57G)
+####[@SmartDate](http://goo.gl/iZyaZ)
 Defines one or more attributes to set the saved time automatically.
 
   ex.:
@@ -124,7 +124,7 @@ Defines one or more attributes to set the saved time automatically.
         @Index()
         public Date updatedDate;    
 
-####[@DisupdateFlag](http://goo.gl/LsFCr)
+####[@DisupdateFlag](http://goo.gl/Mymir)
 If you don't want to update by @SmartDate, set its attribute true.
 
   ex.:
@@ -142,10 +142,10 @@ Defines one attribute as id attribute.
 Defines one attribute as version attribute.
 
 ### For Controllers
-####[@Transactional](http://goo.gl/c6mLF)
+####[@Transactional](http://goo.gl/v7Jbn)
 The **@Transactional** annotation enables annotated Actions and/or Controllers to rollback and commit by **GraphDB.rollback()** and **GraphDB.commit()**. If a controller is annotated by @Transaction, its all actions is able to enabled. 
 
-####[@WithGraphDB](http://goo.gl/goLmg)
+####[@WithGraphDB](http://goo.gl/AnpQS)
 The **@WithGraphDB** annotation enables annotated Actions and/or Controllers to use **OrientDB** implicitly.
 
 

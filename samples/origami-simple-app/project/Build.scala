@@ -9,7 +9,7 @@ object ApplicationBuild extends Build {
 
   val appDependencies = Seq(
     // Add your project dependencies here,
-    "com.wingnest.play2" % "play2-origami-plugin_2.10" % "1.0-SNAPSHOT",
+    "com.wingnest.play2" % "play21-origami-plugin_2.10" % "1.0-SNAPSHOT",
 	"org.apache.httpcomponents" % "httpclient" % "4.2.2",
 	"commons-lang" % "commons-lang" % "2.6",
     javaCore
