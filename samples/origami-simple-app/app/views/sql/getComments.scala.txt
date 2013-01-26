@@ -1,0 +1,4 @@
+@(logOrid:String)
+select from (traverse * from @logOrid while
+    (@@class = 'Comment' or @@class = 'Log' or @@class = 'HasComment') and $depth < 3) 
+      where $depth = 2 and @@class = 'Comment' and deletedDate is null order by createdDate asc
