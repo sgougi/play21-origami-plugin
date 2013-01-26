@@ -2,7 +2,7 @@ What is Origami?
 ============
 **Origami plugin** is a Java O/G mapper for the [OrientDB](https://github.com/nuvolabase/orientdb/wiki) with  [Play! framework](http://www.playframework.org/) 2. It maps annotated model classes to ODocument classes of the OrientDB with mapping functionality. 
 
-* For Play2.0.4 of the repository is [here](http://goo.gl/zldem).
+* For Play2.0.4 is [here](http://goo.gl/zldem).
 
 Features
 ======
