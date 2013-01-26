@@ -143,7 +143,7 @@ Defines one attribute as version attribute.
 
 ### For Controllers
 ####[@Transactional](http://goo.gl/v7Jbn)
-The **@Transactional** annotation enables annotated Actions and/or Controllers to rollback and commit by **GraphDB.rollback()** and **GraphDB.commit()**. If a controller is annotated by @Transaction, its all actions is able to enabled. 
+The **@Transactional** annotation enables annotated Actions and/or Controllers to rollback and commit by **GraphDB.rollback()** and **GraphDB.commit()**. If a controller is annotated by @Transactional, its all actions are turned into transactional. 
 
 ####[@WithGraphDB](http://goo.gl/AnpQS)
 The **@WithGraphDB** annotation enables annotated Actions and/or Controllers to use **OrientDB** implicitly.
