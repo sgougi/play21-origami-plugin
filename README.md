@@ -9,7 +9,7 @@ Features
 * Object-Graph-Mapping of annotated model classes based on Object Oriented Inheritance([src](http://goo.gl/tCAhS))
 * Supports for both the embedded OrientDB and the remote OrientDB
 * Enables to customize the format of Model Id ([src](http://goo.gl/0ZNkB))
-* Only embedded OrienDB:
+* On only embedded OrienDB:
    * Enables to use the [OrientDB Studio](https://github.com/nuvolabase/orientdb/wiki/OrientDB-Studio)
    * Enables to make the database directory of the embedded OrientDB a zip file when your application has just started up.
 
