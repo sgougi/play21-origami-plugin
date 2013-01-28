@@ -24,6 +24,9 @@ final public class IdManager {
 	private static IdHandler idHandler = null;
 
 	public String encodeId(final ORID identity) {
+		if( identity.isTemporary() ) {
+			throw new IllegalStateException("temporary object");
+		}		
 		if ( idHandler == null ) {
 			return play.libs.Crypto.encryptAES(identity.toString());
 		}
