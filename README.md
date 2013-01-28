@@ -40,7 +40,7 @@ At a command prompt, type the following commands:
          % cd origami-simple-app
          % play run
 
-There are basic usage in the source code of a [sample application](http://goo.gl/eWFr3). 
+There are basic usage in the source code of a [sample application](http://goo.gl/GC6y7). 
 
 * [Annotated model classes](http://goo.gl/tCAhS)
 
