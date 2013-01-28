@@ -1,0 +1,82 @@
+@* <meta charset="utf-8" /> *@
+@(m:models.vertices.Log)
+
+<div id="log-@m.id" class="row-fluid">
+  <div class="span1" style=""></div>
+  <div class="span10" style="">
+	<table class="table table-bordered">	
+	    <tr>
+	      <td class="span3">Title</td>
+   	      <td colspan="2" class="span7 theme-subject">@m.title</td>
+	    </tr>
+	    <tr>
+	      <td class="span3">Writer</td>
+   	      <td colspan="2" class="span7 theme-subject">@m.name</td>
+	    </tr>	    
+	    <tr>
+	      <td class="span3">Message</td>
+   	      <td colspan="2" class="span7">@m.logBody</td>
+	    </tr>
+	    <tr>
+	      <td colspan="3" class="span10">
+	        <i class="icon-time  icon-black"></i>&nbsp;CreatedDate:&nbsp;@m.createdDate&nbsp;<i class="icon-time  icon-black"></i>&nbsp;UpdatedDate:&nbsp;@m.updatedDate
+          </td>   	      
+	    </tr>
+	    
+		<tr>
+		  <td colspan="3">
+			 <div class="comments container-fluid t-no-float">
+@for(c <- m.getComments()) {
+						<div class="each-comment">
+							<div class="row-fluid" style="text-align:left;">
+								<div class="span12 comment radius2"><div id="comment-body_@c.id" style="padding:5px;" class="comment-mes">@c.content</div></div>
+						</div>
+						<div class="row-fluid" style="text-align:left;margin:2px;">
+								<div class="span7"><i class="icon-time icon-black"></i><span style="margin-left:3px;">@c.createdDate</span>&nbsp;<i class="icon-user icon-black"></i><span style="margin-left:3px;">@c.name</span></div>
+								<div class="span5" style="text-align:right;"><!-- a class="comment-remove" href="javascript:void(0);"><i class="icon-remove icon-black"></i>&nbsp;DEL</a>&nbsp;&nbsp;--></div>
+									<input type="hidden" name="comment-id" value="@c.id"/>
+							</div>
+						</div>
+}
+						<div>
+							<div class="row-fluid" style="text-align:left;">
+								<div class="span12" style="text-align:left;">
+									<div class="span12"><textarea name="content" class="comment-text span12" style="resize: vertical;"></textarea>
+									</div>
+								</div>
+								<div class="span12">
+									<div  class="span9">
+									    <label class="text">
+									       Your name <input name="name" type="text"/>
+    									</label>
+   									</div>
+									<div  class="span3"></div>
+								</div>								
+								<div class="span12">
+									<div  class="span9">
+									    <label class="checkbox">
+									      <input name="disupdate-flag" type="checkbox">I don't want to update the updatedDate prop of This Log 
+    									</label>
+   									</div>
+									<div  class="span1"></div>
+									<div  class="span2" style="text-align:right;padding-right:20px;">
+					            		<span class="post-comment-btn comment-post-btn btn btn-primary">
+						            		<span>POST</span>		            
+							        	</span>
+							        </div>						
+								</div>
+						</div>
+					</div>
+				</div>
+			 </td>
+		</tr>
+					    
+	</table>
+  </div>
+  <div class="span1" style="">
+  </div>   
+</div>
+<script>
+var logId = '@m.id';
+setupLog(logId);
+</script>	    
