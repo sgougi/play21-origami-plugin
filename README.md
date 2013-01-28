@@ -10,7 +10,7 @@ Features
 
 * Supports for both the embedded OrientDB and the remote OrientDB
 
-* Supports for both the Java and Scala project
+* Supports for both the **Java** and **Scala** project
 
 * Enables to customize the format of Model Id ([src](http://goo.gl/0ZNkB))
 
