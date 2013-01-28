@@ -141,7 +141,7 @@ Defines one attribute as id attribute.
 ####@javax.persistence.Version
 Defines one attribute as version attribute.
 
-### For Controllers
+### For Controllers (Only Java Project)
 ####[@Transactional](http://goo.gl/v7Jbn)
 The **@Transactional** annotation enables annotated Actions and/or Controllers to rollback and commit by **GraphDB.rollback()** and **GraphDB.commit()**. If a controller is annotated by @Transactional, its all actions are turned into transactional. 
 
