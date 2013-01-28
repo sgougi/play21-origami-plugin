@@ -7,8 +7,13 @@ What is Origami?
 Features
 ======
 * Object-Graph-Mapping of annotated model classes based on Object Oriented Inheritance([src](http://goo.gl/tCAhS))
+
 * Supports for both the embedded OrientDB and the remote OrientDB
+
+* Supports for both  **Java** and **Scala** project
+
 * Enables to customize the format of Model Id ([src](http://goo.gl/0ZNkB))
+
 * On only embedded OrienDB:
    * Enables to use the [OrientDB Studio](https://github.com/nuvolabase/orientdb/wiki/OrientDB-Studio)
    * Enables to make the database directory of the embedded OrientDB a zip file when your application has just started up.
@@ -141,7 +146,7 @@ Defines one attribute as id attribute.
 ####@javax.persistence.Version
 Defines one attribute as version attribute.
 
-### For Controllers
+### For Controllers (Only Java Project)
 ####[@Transactional](http://goo.gl/v7Jbn)
 The **@Transactional** annotation enables annotated Actions and/or Controllers to rollback and commit by **GraphDB.rollback()** and **GraphDB.commit()**. If a controller is annotated by @Transactional, its all actions are turned into transactional. 
 
