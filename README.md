@@ -162,4 +162,4 @@ Known Issues
 Licence
 ========
 Origami is distributed under the [Apache 2 licence](http://www.apache.org/licenses/LICENSE-2.0.html).
- 
+[<img src="http://www.wingnest.com/objectfactory/logo.gif">](http://www.wingnest.com)
