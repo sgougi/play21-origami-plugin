@@ -9,12 +9,10 @@ function getLogs() {
 }
 function setupLog(logId) {
 	var wlogId = logId
-	console.log("setupLog:" + logId)	
 	var logElmId = "#log-" + logId
 	var logElm = $(logElmId)
 	logElm.find(".post-comment-btn").click(function(obj){
 		var disupdateFlag = logElm.find("input[name=disupdate-flag]").is(':checked');
-		console.log(disupdateFlag)
 		var content = logElm.find("textarea[name=content]").val();
 		var name = logElm.find("input[name=name]").val();
 		data = {
@@ -23,17 +21,14 @@ function setupLog(logId) {
 				disupdateFlagLog:disupdateFlag
 			};
 	    var url = "/log/" + wlogId + "/comment/"
-	    console.log(url)
 		$.ajax({
 			type:'POST',
 			url: url,
 			cache: false,
 			data: data
 		}).done(function( result ) {
-			console.log(result);
 			getLogs();
 		}).fail(function(result) {
-			console.log(result)
 			if(result.status == 500) {
 				window.alert("not found(bug?)");
 			} else {
@@ -65,7 +60,6 @@ $(document).ready( function() {
 			cache: false,
 			data: data
 		}).done(function( result ) {
-			console.log(result);
 			$('#log-title-input').val("")
 			$('#name-input').val("")
 			$('#log-body-textarea').val("")			
