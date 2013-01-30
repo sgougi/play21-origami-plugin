@@ -20,11 +20,11 @@ Features
 
 Requirements
 =========
-* Only supports Play2.1-RC2 or greater.
+* Only supports Play2.1-RC3 or greater.
 
 Install
 ====
-  1)  Install Play framework 2.1-RC2 and Java 5 or 6
+  1)  Install Play framework 2.1-RC3 and Java 5 or 6
 
   2)  Executing the command 
 
@@ -157,7 +157,7 @@ The **@WithGraphDB** annotation enables annotated Actions and/or Controllers to 
 
 Known Issues
 =============
-* Origami is influenced by the following bug of Play! 2.1-RC2
+* Origami may be influenced by the following bug
  * [Play Framework 2.1-RC2: NoSuchFieldError's created by reverse routing in templates](http://goo.gl/dKSJd)
  
 Licence

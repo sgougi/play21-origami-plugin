@@ -349,6 +349,8 @@ final public class GraphDB {
 	}
 
 	private static void setIdentityPropertyOfPojo(final List<Property> propertyList, final ODocument doc, final GraphModel model) {
+		if(doc.getIdentity().isTemporary()) return;
+		
 		model.orid = doc.getIdentity();
 		final Property idProp = GraphDBPropertyUtils.getIdProperty(propertyList);
 		if ( idProp != null ) {
