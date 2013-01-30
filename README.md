@@ -8,7 +8,7 @@ Features
 ======
 * Object-Graph-Mapping of annotated model classes based on Object Oriented Inheritance([src](http://goo.gl/tCAhS))
 
-* Supports for both the embedded OrientDB and the remote OrientDB
+* Supports for both the embedded OrientDB and remote OrientDB
 
 * Supports for both  **Java** and **Scala** project
 
