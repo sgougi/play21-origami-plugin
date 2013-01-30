@@ -50,6 +50,14 @@ public abstract class GraphVertexModel extends GraphModel {
 	protected void _delete() {
 		db().removeVertex(getORID());
 	}
+	
+	@Override
+	protected void _reload() {
+		final ODocument vertex = getDocument();
+		vertex.reload();
+		final List<Property> propertyList = GraphDBPropertyUtils.listProperties(this.getClass());
+		GraphDB.serializeFiledsOfGraphDocumentToPojo(propertyList, vertex, this);		
+	}	
 
 	protected ODocument createModel() {
 		final String schemaName = getSchemaName();

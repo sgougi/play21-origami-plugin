@@ -72,6 +72,17 @@ public abstract class GraphModel {
 		_delete();
 		return (T) this;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public <T extends GraphModel> T reload() {
+		try {
+			_reload();
+			return (T) this;
+		} catch ( RuntimeException e ) {
+			error("GraphModel.reload: class = %s, orid = %s: %s", this.getClass().getName(), this.getORID() != null ? this.getORID().toString() : "null", e.getMessage());
+			throw new OrigamiUnexpectedException(e);
+		}
+	}	
 
 	public boolean isUnmanaged() {
 		return getORID() == null;
@@ -106,6 +117,8 @@ public abstract class GraphModel {
 	abstract protected void _delete();
 
 	abstract protected void _save();
+	
+	abstract protected void _reload();	
 	
 	abstract protected ODocument createModel();
 
@@ -160,7 +173,7 @@ public abstract class GraphModel {
 						}
 					}
 				} catch ( Exception e ) {
-					debug("SmartDateUtils#doEnhance : %s, %s", e.getClass().getName(), e.getMessage());
+					error("SmartDateUtils#doEnhance : %s, %s", e.getClass().getName(), e.getMessage());
 					throw new OrigamiUnexpectedException(e);
 				}
 			}
@@ -174,7 +187,6 @@ public abstract class GraphModel {
 					field.setAccessible(true);
 					try {
 						final boolean b = field.getBoolean(g);
-						debug("######>> hasDisupdateFlag : found DisupdateFlag Annotation : value = " + b);
 						return b;
 					} catch ( Exception e ) {
 						throw new OrigamiUnexpectedException(e);

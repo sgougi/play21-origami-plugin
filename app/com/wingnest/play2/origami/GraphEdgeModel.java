@@ -103,6 +103,16 @@ public abstract class GraphEdgeModel<OUT extends GraphVertexModel, IN extends Gr
 		db().removeEdge(getORID());
 	}	
 
+	@Override
+	protected void _reload() {
+		outVertex = null;
+		inVertex = null;		
+		final ODocument edge = getDocument();
+		edge.reload();
+		final List<Property> propertyList = GraphDBPropertyUtils.listProperties(this.getClass());
+		GraphDB.serializeFiledsOfGraphDocumentToPojo(propertyList, edge, this);		
+	}
+	
 	protected ODocument createModel() {
 		final String schemaName = getSchemaName();
 		return db().createEdge(outVertex != null ? outVertex.getDocument() : null, inVertex != null ? inVertex.getDocument() : null, schemaName);

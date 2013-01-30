@@ -32,7 +32,14 @@ public class Application extends Controller {
 		if ( logForm.hasErrors() ) {
 			return badRequest(logForm.errorsAsJson());
 		}
+
 		logForm.get().save();
+		Logger.debug("after saving : id = " + logForm.get().id);
+
+		GraphDB.commit();
+		logForm.get().reload();
+		Logger.debug("after reloading: id = " + logForm.get().id);
+		
 		return ok();
 	}
 
