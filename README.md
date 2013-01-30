@@ -79,7 +79,8 @@ The com.wingnest.play2.origami.[GraphDB](http://goo.gl/XyUAA) class is a Facade 
 
 * [com.wingnest.play2.origami.GraphVertexModel](http://goo.gl/DVcsa)
 * [com.wingnest.play2.origami.GraphEdgeModel](http://goo.gl/EwGj9)
-* [com.wingnest.play2.origami.GraphModel](http://goo.gl/KJjLD)
+
+Both classes extends [com.wingnest.play2.origami.GraphModel](http://goo.gl/KJjLD).
 
 ## Annotatins for O/G mapping
 
