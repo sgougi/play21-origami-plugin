@@ -64,3 +64,4 @@ public abstract class GraphVertexModel extends GraphModel {
 		return db().createVertex(schemaName);
 	}	
 }
+
