@@ -1,29 +1,35 @@
 What is Origami?
 ============
+
 **Origami plugin** is a Java O/G mapper for the [OrientDB](https://github.com/nuvolabase/orientdb/wiki) with  [Play! framework](http://www.playframework.org/) 2. It maps annotated model classes to ODocument classes of the OrientDB with mapping functionality. 
 
 * For Play2.0.4 is [here](http://goo.gl/zldem).
 
 Features
 ======
-* Object-Graph-Mapping of annotated model classes based on Object Oriented Inheritance([src](http://goo.gl/tCAhS))
+
+* Object-Graph-Mapping of annotated model classes based on Object Oriented Inheritance([src](samples/origami-simple-app/app/models))
+
+* Supports for both **Java** and **Scala** Project
 
 * Supports for both the embedded OrientDB and remote OrientDB
 
-* Supports for both  **Java** and **Scala** project
-
-* Enables to customize the format of Model Id ([src](http://goo.gl/0ZNkB))
+* Enables to customize the format of Model Id ([src](app/com/wingnest/play2/origami/IdManager.java))
 
 * On only embedded OrienDB:
+
    * Enables to use the [OrientDB Studio](https://github.com/nuvolabase/orientdb/wiki/OrientDB-Studio)
+
    * Enables to make the database directory of the embedded OrientDB a zip file when your application has just started up.
 
 Requirements
 =========
+
 * Only supports Play2.1-RC3 or greater.
 
 Install
 ====
+
   1)  Install Play framework 2.1-RC3 and Java 5 or 6
 
   2)  Executing the command 
@@ -37,6 +43,7 @@ Install
 
 Run sample application and Usage
 =======================
+
 At a command prompt, type the following commands:
 
          % cd play21-origami-plugin
@@ -45,20 +52,17 @@ At a command prompt, type the following commands:
          % cd origami-simple-app
          % play run
 
-There are basic usage in the source code of a [sample application](http://goo.gl/GC6y7). 
+There are basic usage in the source code of a [sample application](samples). 
 
-* [Annotated model classes](http://goo.gl/tCAhS)
-
-* [Customizing id format](http://goo.gl/jXcsN)
-
-* [Application configuration: conf/application.conf](http://goo.gl/8Cqq3)
-
-* [Dependency settings: project/Build.scala](http://goo.gl/xbU9c)  
-
-* [Controller with transaction](http://goo.gl/AvNc5)
+* [Annotated model classes](samples/origami-simple-app/app/models)
+* [Customizing id format](samples/origami-simple-app/app/Global.java)
+* [Application configuration: conf/application.conf](samples/origami-simple-app/conf/application.conf)
+* [Dependency settings: project/Build.scala](samples/origami-simple-app/project/Build.scala)  
+* [Controller with transaction](samples/origami-simple-app/app/controllers/Application.java)
 
 ## Facade Class for OrientDB
-The com.wingnest.play2.origami.[GraphDB](http://goo.gl/XyUAA) class is a Facade class.
+
+The com.wingnest.play2.origami.[GraphDB](app/com/wingnest/play2/origami/GraphDB.java) class is a Facade class.
 
 * GraphDB.open()
 * GraphDB.close()
@@ -77,15 +81,15 @@ The com.wingnest.play2.origami.[GraphDB](http://goo.gl/XyUAA) class is a Facade 
 
 ## Abstract Model classes
 
-* [com.wingnest.play2.origami.GraphVertexModel](http://goo.gl/DVcsa)
-* [com.wingnest.play2.origami.GraphEdgeModel](http://goo.gl/EwGj9)
+* [com.wingnest.play2.origami.GraphVertexModel](app/com/wingnest/play2/origami/GraphVertexModel.java)
+* [com.wingnest.play2.origami.GraphEdgeModel](app/com/wingnest/play2/origami/GraphEdgeModel.java)
 
-Both classes extends [com.wingnest.play2.origami.GraphModel](http://goo.gl/KJjLD).
+Both classes extends [com.wingnest.play2.origami.GraphModel](app/com/wingnest/play2/origami/GraphModel.java).
 
 ## Annotatins for O/G mapping
 
 ### For Models
-####[@Index](http://goo.gl/RiF1W)
+####[@Index](app/com/wingnest/play2/origami/annotations/Index.java)
 Defines one or more indexes.
 
   ex.:
@@ -100,7 +104,7 @@ Defines one or more indexes.
            ...
          }
 
-####[@CompositeIndex](http://goo.gl/M1ej3)
+####[@CompositeIndex](app/com/wingnest/play2/origami/annotations/CompositeIndex.java)
 Defines one or more composite indexes.
 
   ex.:
@@ -115,7 +119,7 @@ Defines one or more composite indexes.
             ...
         }     
 
-####[@SmartDate](http://goo.gl/iZyaZ)
+####[@SmartDate](app/com/wingnest/play2/origami/annotations/SmartDate.java)
 Defines one or more attributes to set the saved time automatically.
 
   ex.:
@@ -130,7 +134,7 @@ Defines one or more attributes to set the saved time automatically.
         @Index()
         public Date updatedDate;    
 
-####[@DisupdateFlag](http://goo.gl/Mymir)
+####[@DisupdateFlag](app/com/wingnest/play2/origami/annotations/DisupdateFlag.java)
 If you don't want to update by @SmartDate, set its attribute true.
 
   ex.:
@@ -148,18 +152,17 @@ Defines one attribute as id attribute.
 Defines one attribute as version attribute.
 
 ### For Controllers (Only Java Project)
-####[@Transactional](http://goo.gl/v7Jbn)
+####[@Transactional](app/com/wingnest/play2/origami/annotations/Transactional.java)
 The **@Transactional** annotation enables annotated Actions and/or Controllers to rollback and commit by **GraphDB.rollback()** and **GraphDB.commit()**. If a controller is annotated by @Transactional, its all actions are turned into transactional. 
 
-####[@WithGraphDB](http://goo.gl/AnpQS)
+####[@WithGraphDB](app/com/wingnest/play2/origami/annotations/WithGraphDB.java)
 The **@WithGraphDB** annotation enables annotated Actions and/or Controllers to use **OrientDB** implicitly.
-
 
 Known Issues
 =============
 * Origami may be influenced by the following bug
  * [Play Framework 2.1-RC2: NoSuchFieldError's created by reverse routing in templates](http://goo.gl/dKSJd)
- 
+
 Licence
 ========
 Origami is distributed under the [Apache 2 licence](http://www.apache.org/licenses/LICENSE-2.0.html).
