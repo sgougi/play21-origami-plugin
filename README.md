@@ -25,12 +25,12 @@ Features
 Requirements
 =========
 
-* Only supports Play2.1-RC3 or greater.
+* Only supports Play2.1-RC4 or greater.
 
 Install
 ====
 
-  1)  Install Play framework 2.1-RC3 and Java 5 or 6
+  1)  Install Play framework 2.1-RC4 and Java 5 or 6
 
   2)  Executing the command 
 
