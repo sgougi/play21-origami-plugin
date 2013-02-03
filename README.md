@@ -164,4 +164,4 @@ Known Issues
 
 Licence
 ========
-Origami is distributed under the [Apache 2 license](http://www.apache.org/licenses/LICENSE-2.0.html).
+Origami is distributed under the [Apache 2 licence](http://www.apache.org/licenses/LICENSE-2.0.html).
