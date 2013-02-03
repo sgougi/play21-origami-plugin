@@ -47,7 +47,6 @@ Run sample application and Usage
 At a command prompt, type the following commands:
 
          % cd play21-origami-plugin
-         % play publish-local
          % cd samples
          % cd origami-simple-app
          % play run
@@ -165,4 +164,4 @@ Known Issues
 
 Licence
 ========
-Origami is distributed under the [Apache 2 licence](http://www.apache.org/licenses/LICENSE-2.0.html).
+Origami is distributed under the [Apache 2 license](http://www.apache.org/licenses/LICENSE-2.0.html).
