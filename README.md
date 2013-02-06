@@ -3,8 +3,6 @@ What is Origami?
 
 **Origami plugin** is a Java O/G mapper for the [OrientDB](https://github.com/nuvolabase/orientdb/wiki) with  [Play! framework](http://www.playframework.org/) 2. It maps annotated model classes to ODocument classes of the OrientDB with mapping functionality. 
 
-* For Play2.0.4 is [here](http://goo.gl/zldem).
-
 Features
 ======
 
@@ -25,12 +23,12 @@ Features
 Requirements
 =========
 
-* Only supports Play2.1-RC4 or greater.
+* Only supports Play2.1.0 or greater.
 
 Install
 ====
 
-  1)  Install Play framework 2.1-RC4 and Java 5 or 6
+  1)  Install Play framework 2.1.0 and Java 5 or 6
 
   2)  Executing the command 
 
@@ -159,8 +157,7 @@ The **@WithGraphDB** annotation enables annotated Actions and/or Controllers to 
 
 Known Issues
 =============
-* Origami may be influenced by the following bug
- * [Play Framework 2.1-RC2: NoSuchFieldError's created by reverse routing in templates](http://goo.gl/dKSJd)
+* Nothing
 
 Licence
 ========
