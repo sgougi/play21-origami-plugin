@@ -48,26 +48,26 @@ import com.orientechnologies.orient.core.tx.OTransaction.TXTYPE;
 
 final public class GraphDB {
 
-	final static ThreadLocal<OGraphDatabase> localGraphTx = new ThreadLocal<OGraphDatabase>();
-	final private static IdManager idManager = new IdManager();
+	final static ThreadLocal<OGraphDatabase> TL_GRAPH_DATABASE = new ThreadLocal<OGraphDatabase>();
+	final private static IdManager ID_MANAGER = new IdManager();
 
-	final private static List<Class<? extends ODatabaseListener>> listeners = new ArrayList<Class<? extends ODatabaseListener>>();
-	final private static List<Class<? extends ORecordHook>> graphHooks = new ArrayList<Class<? extends ORecordHook>>();
+	final private static List<Class<? extends ODatabaseListener>> LISTENERS = new ArrayList<Class<? extends ODatabaseListener>>();
+	final private static List<Class<? extends ORecordHook>> GRAPH_HOOKS = new ArrayList<Class<? extends ORecordHook>>();
 
 	// //
 
 	public static List<Class<? extends ODatabaseListener>> getListeners() {
-		return listeners;
+		return LISTENERS;
 	}
 
 	public static List<Class<? extends ORecordHook>> getGraphHooks() {
-		return graphHooks;
+		return GRAPH_HOOKS;
 	}
 
 	// //
 
 	public static IdManager getIdManager() {
-		return idManager;
+		return ID_MANAGER;
 	}
 
 	public static void setIdHandler(final IdHandler handler) {
@@ -103,15 +103,15 @@ final public class GraphDB {
 	public static void close() {
 		commit();
 		if ( hasOGraphDatabase() ) {
-			if ( !localGraphTx.get().isClosed() )
-				localGraphTx.get().close();
-			localGraphTx.set(null);
+			if ( !TL_GRAPH_DATABASE.get().isClosed() )
+				TL_GRAPH_DATABASE.get().close();
+			TL_GRAPH_DATABASE.set(null);
 		}
 	}
 
 	public static void commit() {
-		if ( hasOpenedOGraphDatabase() && localGraphTx.get().getTransaction().getStatus() == TXSTATUS.BEGUN ) {
-			localGraphTx.get().commit();
+		if ( hasOpenedOGraphDatabase() && TL_GRAPH_DATABASE.get().getTransaction().getStatus() == TXSTATUS.BEGUN ) {
+			TL_GRAPH_DATABASE.get().commit();
 		}
 	}
 
@@ -125,16 +125,16 @@ final public class GraphDB {
 			} else {
 				db.create();
 			}
-			localGraphTx.set(db);
+			TL_GRAPH_DATABASE.set(db);
 			registerListeners(db);
 			registerHooks(db);
 		}
-		return localGraphTx.get();
+		return TL_GRAPH_DATABASE.get();
 	}
 
 	public static void rollback() {
-		if ( hasOpenedOGraphDatabase() && localGraphTx.get().getTransaction().getStatus() == TXSTATUS.BEGUN ) {
-			localGraphTx.get().rollback();
+		if ( hasOpenedOGraphDatabase() && TL_GRAPH_DATABASE.get().getTransaction().getStatus() == TXSTATUS.BEGUN ) {
+			TL_GRAPH_DATABASE.get().rollback();
 		}
 	}
 
@@ -269,9 +269,9 @@ final public class GraphDB {
 	}
 
 	public static void initializeAttributes() {
-		listeners.clear();
-		graphHooks.clear();
-		localGraphTx.remove();
+		LISTENERS.clear();
+		GRAPH_HOOKS.clear();
+		TL_GRAPH_DATABASE.remove();
 	}
 
 	// //
@@ -320,11 +320,11 @@ final public class GraphDB {
 	// //
 
 	private static boolean hasOpenedOGraphDatabase() {
-		return localGraphTx.get() != null && (!localGraphTx.get().isClosed());
+		return TL_GRAPH_DATABASE.get() != null && (!TL_GRAPH_DATABASE.get().isClosed());
 	}
 
 	private static boolean hasOGraphDatabase() {
-		return localGraphTx.get() != null;
+		return TL_GRAPH_DATABASE.get() != null;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -337,13 +337,13 @@ final public class GraphDB {
 	}
 
 	private static void registerHooks(final OGraphDatabase db) {
-		for ( final Class<?> hook : graphHooks ) {
+		for ( final Class<?> hook : GRAPH_HOOKS ) {
 			db.registerHook((ORecordHook) newInstance(hook));
 		}
 	}
 
 	private static void registerListeners(final ODatabase db) {
-		for ( final Class<?> listener : listeners ) {
+		for ( final Class<?> listener : LISTENERS ) {
 			db.registerListener((ODatabaseListener) newInstance(listener));
 		}
 	}

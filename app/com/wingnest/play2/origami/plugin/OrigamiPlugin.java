@@ -305,9 +305,9 @@ final public class OrigamiPlugin extends Plugin {
 		final Map<String, OIndex<?>> classIndexCache = new HashMap<String, OIndex<?>>();
 		final Map<String, OIndex<?>> compositeIndexCache = new HashMap<String, OIndex<?>>();
 		final Set<String> wkCurIndexNames = new HashSet<String>();
-		for ( final OProperty prop : oClass.properties() ) {
-			debug("[b] prop name =%s, type = %s", prop.getName(), prop.getType());
-		}
+//		for ( final OProperty prop : oClass.properties() ) {
+//			debug("[b] prop name =%s, type = %s", prop.getName(), prop.getType());
+//		}
 		for ( final OIndex<?> index : oClass.getClassIndexes() ) {
 			wkCurIndexNames.add(index.getName());
 			if ( index.getName().indexOf('.') > -1 ) {
@@ -315,7 +315,7 @@ final public class OrigamiPlugin extends Plugin {
 			} else {
 				compositeIndexCache.put(index.getName(), index);
 			}
-			debug("[b] index name =%s, type = %s", index.getName(), index.getType());
+//			debug("[b] index name =%s, type = %s", index.getName(), index.getType());
 		}
 		for ( final Field field : javaClass.getDeclaredFields() ) {
 			if ( (!Modifier.isPublic(field.getModifiers()) || Modifier.isStatic(field.getModifiers())) || field.isAnnotationPresent(Id.class) || field.isAnnotationPresent(Version.class) || field.isAnnotationPresent(Transient.class) || field.isAnnotationPresent(DisupdateFlag.class) )
@@ -398,12 +398,12 @@ final public class OrigamiPlugin extends Plugin {
 			deleteIndex(oClass, indexName, classIndexCache, compositeIndexCache);
 		}
 
-		for ( final OProperty prop : oClass.properties() ) {
-			debug("[a] prop name =%s, type = %s", prop.getName(), prop.getType());
-		}
-		for ( final OIndex<?> index : oClass.getClassIndexes() ) {
-			debug("[a] class index name =%s, type = %s", index.getName(), index.getType());
-		}
+//		for ( final OProperty prop : oClass.properties() ) {
+//			debug("[a] prop name =%s, type = %s", prop.getName(), prop.getType());
+//		}
+//		for ( final OIndex<?> index : oClass.getClassIndexes() ) {
+//			debug("[a] class index name =%s, type = %s", index.getName(), index.getType());
+//		}
 	}
 
 	private void deleteIndex(final OClass oClass, final String indexName, final Map<String, OIndex<?>> classIndexCache, final Map<String, OIndex<?>> compositeIndexCache) {

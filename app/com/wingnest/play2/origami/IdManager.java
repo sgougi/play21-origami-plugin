@@ -17,31 +17,36 @@
  */
 package com.wingnest.play2.origami;
 
+import org.apache.commons.codec.DecoderException;
+import org.apache.commons.codec.binary.Hex;
+
 import com.orientechnologies.orient.core.id.ORID;
+import com.wingnest.play2.origami.plugin.exceptions.OrigamiUnexpectedException;
 
 final public class IdManager {
 
-	private static IdHandler idHandler = null;
+	private static IdHandler ID_HANDLER = null;
 
 	public String encodeId(final ORID identity) {
 		if( identity.isTemporary() ) {
 			throw new IllegalStateException("Temporary object does not ganerates id : " + identity.toString());
 		}		
-		if ( idHandler == null ) {
-			return play.libs.Crypto.encryptAES(identity.toString());
+		if ( ID_HANDLER == null ) {
+			final String rid = identity.toString();
+			return Codec.byteToHexString(rid.getBytes()); 
 		}
-		return idHandler.encode(identity);
+		return ID_HANDLER.encode(identity);
 	}
 
 	public String decodeId(final String id) {
-		if ( idHandler == null ) {
-			return play.libs.Crypto.decryptAES(id);
+		if ( ID_HANDLER == null ) {
+			return new String(Codec.hexStringToByte(id));
 		}
-		return idHandler.decode(id);
+		return ID_HANDLER.decode(id);
 	}
 
 	public void setIdHandler(final IdHandler handler) {
-		idHandler = handler;
+		ID_HANDLER = handler;
 	}
 
 	public interface IdHandler {
@@ -50,4 +55,18 @@ final public class IdManager {
 		String decode(String encodedId);
 	}
 
+	public static class Codec {
+		// from play1.2.5
+		public static byte[] hexStringToByte(String hexString) {
+			try {
+				return Hex.decodeHex(hexString.toCharArray());
+			} catch ( DecoderException e ) {
+				throw new OrigamiUnexpectedException(e);
+			}
+		}
+
+		public static String byteToHexString(byte[] bytes) {
+			return String.valueOf(Hex.encodeHex(bytes));
+		}
+	}	
 }

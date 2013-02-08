@@ -23,7 +23,7 @@ Features
 Requirements
 =========
 
-* Only supports Play2.1.0 or greater.
+* Only supports Play 2.1.0 or greater.
 
 Install
 ====
