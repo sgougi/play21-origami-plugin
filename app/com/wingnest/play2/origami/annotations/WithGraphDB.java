@@ -1,7 +1,5 @@
 /*
- * Copyright since 2013 Shigeru GOUGI
- *                              e-mail:  sgougi@gmail.com
- *                              twitter: @igerugo
+ * Copyright since 2013 Shigeru GOUGI (sgougi@gmail.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
