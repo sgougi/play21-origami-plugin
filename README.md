@@ -8,9 +8,7 @@ Features
 
 * Object-Graph-Mapping of annotated model classes based on Object Oriented Inheritance([src](samples/origami-simple-app/app/models))
 
-* Supports for both **Java** and **Scala** Project 
-
-　* Scala models are not currently supported
+* Supports for both **Java** and **Scala** Project (Scala models are not currently supported)
 
 * Supports for both the embedded OrientDB and remote OrientDB
 
