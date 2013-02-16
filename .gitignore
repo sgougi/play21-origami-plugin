@@ -18,3 +18,5 @@ dist
 /.settings
 /.target
 /samples/origami-simple-app/.target
+/samples/origami-simple-scala-app/db
+/samples/origami-simple-app/db
