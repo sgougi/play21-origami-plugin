@@ -34,12 +34,8 @@ final public class GraphDBPropertyUtils {
 
 	public static List<Property> listProperties(final Class<?> clazz) {
 		final List<Property> properties = new ArrayList<Property>();
-		final Set<Field> fields = new LinkedHashSet<Field>();
-		Class<?> tclazz = clazz;
-		while ( !tclazz.equals(Object.class) ) {
-			Collections.addAll(fields, tclazz.getDeclaredFields());
-			tclazz = tclazz.getSuperclass();
-		}
+		final Class<?> tclazz = clazz;		
+		final Set<Field> fields = getDeepDeclaredFields(tclazz);
 		for ( final Field f : fields ) {
 			if ( Modifier.isTransient(f.getModifiers()) ) {
 				continue;
@@ -57,6 +53,16 @@ final public class GraphDBPropertyUtils {
 		}
 		return properties;
 	}
+	
+	public static Set<Field> getDeepDeclaredFields(Class<?> clazz) {
+		final Set<Field> fields = new LinkedHashSet<Field>();
+		Class<?> tclazz = clazz;
+		while ( !tclazz.equals(Object.class) ) {
+			Collections.addAll(fields, tclazz.getDeclaredFields());
+			tclazz = tclazz.getSuperclass();
+		}
+		return fields;
+	}	
 
 	public static Property getIdProperty(final List<Property> propList) {
 		return getGeneratedField(propList, Id.class);
@@ -77,8 +83,9 @@ final public class GraphDBPropertyUtils {
 
 	private static Property buildProperty(final Field field) {
 		final Property modelProperty = new Property();
+		field.setAccessible(true);
 		modelProperty.type = field.getType();
-		modelProperty.field = field;
+		modelProperty.field = field;		
 		if ( field.isAnnotationPresent(Id.class) || field.isAnnotationPresent(Version.class) ) {
 			modelProperty.isGenerated = true;
 		}

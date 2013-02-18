@@ -21,11 +21,13 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import com.wingnest.play2.origami.GraphModel;
+
 @Target(value = { ElementType.FIELD })
 @Retention(value = RetentionPolicy.RUNTIME)
 @Inherited
 public @interface SmartDate {
-
-	SmartDateType type();
+	
+	GraphModel.SMART_DATE_TYPE dateType() default GraphModel.SMART_DATE_TYPE.CREATED_DATE;
 
 }

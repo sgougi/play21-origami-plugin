@@ -7,11 +7,11 @@ import javax.persistence.Version;
 
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 
+import com.wingnest.play2.origami.GraphModel;
 import com.wingnest.play2.origami.GraphVertexModel;
 import com.wingnest.play2.origami.annotations.DisupdateFlag;
 import com.wingnest.play2.origami.annotations.Index;
 import com.wingnest.play2.origami.annotations.SmartDate;
-import com.wingnest.play2.origami.annotations.SmartDateType;
 
 public abstract class GraphVertexModelBase extends GraphVertexModel {
 
@@ -25,11 +25,11 @@ public abstract class GraphVertexModelBase extends GraphVertexModel {
 	// is kind of @Transient implicitly
 	public boolean disupdateFlag = false;
 
-	@SmartDate(type = SmartDateType.CreatedDate)
+	@SmartDate(dateType = GraphModel.SMART_DATE_TYPE.CREATED_DATE)	
 	@Index()
 	public Date createdDate;
 
-	@SmartDate(type = SmartDateType.UpdatedDate)
+	@SmartDate(dateType = GraphModel.SMART_DATE_TYPE.UPDATED_DATE)		
 	@Index()
 	public Date updatedDate;
 

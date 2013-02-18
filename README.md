@@ -8,7 +8,7 @@ Features
 
 * Object-Graph-Mapping of annotated model classes based on Object Oriented Inheritance([src](samples/origami-simple-app/app/models))
 
-* Supports for both **Java** and **Scala** Project (Scala models are not currently supported)
+* Supports for both **Java** and **Scala** Project (Both Scala models and Java models are supported)
 
 * Supports for both the embedded OrientDB and remote OrientDB
 
@@ -121,13 +121,13 @@ Defines one or more attributes to set the saved time automatically.
 
   ex.:
 
-        @SmartDate(type = SmartDateType.CreatedDate)
+        @SmartDate(dateType = GraphModel.SMART_DATE_TYPE.CREATED_DATE)	
         @Index()
         public Date createdDate;
 
   ex.:
 
-        @SmartDate(type = SmartDateType.UpdatedDate)
+        @SmartDate(dateType = GraphModel.SMART_DATE_TYPE.UPDATED_DATE)
         @Index()
         public Date updatedDate;    
 

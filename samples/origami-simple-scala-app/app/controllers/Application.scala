@@ -47,11 +47,14 @@ object Application extends Controller {
   }
 
   def getLogs = Action {
-    GraphDB.open()
-    val query = views.txt.sql.getLogs.render().body
-    val logModels: java.util.List[Log] = GraphDB.synchQueryModel(query)
-    GraphDB.close()
-    Ok(views.html.logs.render(logModels))
+    try {
+      GraphDB.open()
+      val query = views.txt.sql.getLogs.render().body
+      val logModels: java.util.List[Log] = GraphDB.synchQueryModel(query)
+      Ok(views.html.logs.render(logModels))
+    } finally {
+      GraphDB.close()
+    }
   }
 
   val commentForm = Form(
@@ -67,7 +70,7 @@ object Application extends Controller {
         case (name, content, disupdateFlagLog) =>
           GraphDB.begin()
           try {
-            val log:Log = GraphDB.findById(logId);
+            val log: Log = GraphDB.findById(logId);
             if (log == null)
               NotFound
             log.disupdateFlag = disupdateFlagLog;

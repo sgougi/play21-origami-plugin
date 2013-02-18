@@ -316,7 +316,7 @@ final public class OrigamiPlugin extends Plugin {
 //			debug("[b] index name =%s, type = %s", index.getName(), index.getType());
 		}
 		for ( final Field field : javaClass.getDeclaredFields() ) {
-			if ( (!Modifier.isPublic(field.getModifiers()) || Modifier.isStatic(field.getModifiers())) || field.isAnnotationPresent(Id.class) || field.isAnnotationPresent(Version.class) || field.isAnnotationPresent(Transient.class) || field.isAnnotationPresent(DisupdateFlag.class) )
+			if (  Modifier.isStatic(field.getModifiers()) || field.isAnnotationPresent(Id.class) || field.isAnnotationPresent(Version.class) || field.isAnnotationPresent(Transient.class) || field.isAnnotationPresent(DisupdateFlag.class) )
 				continue;
 
 			OProperty prop = oClass.getProperty(field.getName());

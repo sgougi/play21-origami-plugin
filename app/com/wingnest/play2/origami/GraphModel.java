@@ -19,13 +19,15 @@ import static com.wingnest.play2.origami.plugin.OrigamiLogger.*;
 
 import java.lang.reflect.Field;
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.Transient;
 
 import com.wingnest.play2.origami.annotations.DisupdateFlag;
 import com.wingnest.play2.origami.annotations.SmartDate;
-import com.wingnest.play2.origami.annotations.SmartDateType;
+import com.wingnest.play2.origami.plugin.OrigamiLogger;
 import com.wingnest.play2.origami.plugin.exceptions.OrigamiUnexpectedException;
+import com.wingnest.play2.origami.plugin.utils.GraphDBPropertyUtils;
 
 import com.orientechnologies.orient.core.db.graph.OGraphDatabase;
 import com.orientechnologies.orient.core.id.ORID;
@@ -33,6 +35,10 @@ import com.orientechnologies.orient.core.record.impl.ODocument;
 
 public abstract class GraphModel {
 
+	public static enum SMART_DATE_TYPE {
+		CREATED_DATE, UPDATED_DATE
+	}
+	
 	@Transient
 	protected ORID orid = null;
 	@Transient
@@ -142,8 +148,9 @@ public abstract class GraphModel {
 		public static void enhance(GraphModel g) {
 			if ( g == null )
 				return;
-			final Field[] fields = g.getClass().getFields();
+			final Set<Field> fields = GraphDBPropertyUtils.getDeepDeclaredFields(g.getClass());
 			for ( final Field field : fields ) {
+				field.setAccessible(true);
 				doEnhance(field, g, 0);
 			}
 		}
@@ -151,35 +158,37 @@ public abstract class GraphModel {
 		private static void doEnhance(Field field, Object g, int depth) {
 			final SmartDate sd = field.getAnnotation(SmartDate.class);
 			if ( sd != null ) {
-				final SmartDateType sdt = sd.type();
-				try {
-					if ( sdt.equals(SmartDateType.CreatedDate) ) {
-						if ( Date.class.isAssignableFrom(field.getType()) ) {
-							Object obj = field.get(g);
-							if ( obj == null )
-								field.set(g, new Date());
-						}
-					} else if ( sdt.equals(SmartDateType.UpdatedDate) ) {
-						if ( Date.class.isAssignableFrom(field.getType()) ) {
-							field.setAccessible(true);
-							Object obj = field.get(g);
-							if ( obj == null ) {
-								field.set(g, new Date());
-							} else if ( !hasDisupdateFlag(g) ) {
-								field.set(g, new Date());
+				SMART_DATE_TYPE sdt = sd.dateType();
+				if( sdt != null ) {
+					try {
+						if ( sdt.equals(SMART_DATE_TYPE.CREATED_DATE) ) {
+							if ( Date.class.isAssignableFrom(field.getType()) ) {
+								Object obj = field.get(g);
+								if ( obj == null )
+									field.set(g, new Date());
+							}
+						} else if ( sdt.equals(SMART_DATE_TYPE.UPDATED_DATE) ) {
+							if ( Date.class.isAssignableFrom(field.getType()) ) {
+								Object obj = field.get(g);
+								if ( obj == null ) {
+									field.set(g, new Date());
+								} else if ( !hasDisupdateFlag(g) ) {
+									field.set(g, new Date());
+								}
 							}
 						}
+					} catch ( Exception e ) {
+						error("SmartDateUtils#doEnhance : %s, %s", e.getClass().getName(), e.getMessage());
+						throw new OrigamiUnexpectedException(e);
 					}
-				} catch ( Exception e ) {
-					error("SmartDateUtils#doEnhance : %s, %s", e.getClass().getName(), e.getMessage());
-					throw new OrigamiUnexpectedException(e);
 				}
 			}
 		}
 
 		private static boolean hasDisupdateFlag(Object g) {
-			final Field[] fields = g.getClass().getFields();
+			final Set<Field> fields = GraphDBPropertyUtils.getDeepDeclaredFields(g.getClass());
 			for ( final Field field : fields ) {
+				OrigamiLogger.debug("hasDisupdateFlag : class = %s, field name = %s", g.getClass().getSimpleName(), field.getName());
 				final DisupdateFlag disupdateFlag = field.getAnnotation(DisupdateFlag.class);
 				if ( disupdateFlag != null ) {
 					field.setAccessible(true);
