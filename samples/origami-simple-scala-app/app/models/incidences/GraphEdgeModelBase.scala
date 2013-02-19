@@ -10,7 +10,6 @@ import com.wingnest.play2.origami.annotations.DisupdateFlag
 import com.wingnest.play2.origami.annotations.Index
 import com.wingnest.play2.origami.annotations.SmartDate
 import com.orientechnologies.orient.core.metadata.schema.OClass
-import scala.beans.BeanProperty
 import scala.annotation.meta.field
 
 abstract class GraphEdgeModelBase[OUT <: GraphVertexModel, IN <: GraphVertexModel] extends GraphEdgeModel[OUT, IN] {

@@ -2,7 +2,6 @@ package models.vertices;
 
 import com.wingnest.play2.origami.annotations.Index
 import scala.annotation.meta.field
-import scala.beans.BeanProperty
 
 case class Comment (
 		@(Index @field) 

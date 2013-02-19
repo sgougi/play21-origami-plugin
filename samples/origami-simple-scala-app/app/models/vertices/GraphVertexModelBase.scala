@@ -9,7 +9,6 @@ import com.wingnest.play2.origami.GraphModel
 import com.wingnest.play2.origami.annotations.DisupdateFlag
 import com.wingnest.play2.origami.annotations.Index
 import com.wingnest.play2.origami.annotations.SmartDate
-import scala.beans.BeanProperty
 import scala.annotation.meta.field
 
 abstract class GraphVertexModelBase extends GraphVertexModel {
