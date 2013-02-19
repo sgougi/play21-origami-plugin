@@ -188,7 +188,6 @@ public abstract class GraphModel {
 		private static boolean hasDisupdateFlag(Object g) {
 			final Set<Field> fields = GraphDBPropertyUtils.getDeepDeclaredFields(g.getClass());
 			for ( final Field field : fields ) {
-				OrigamiLogger.debug("hasDisupdateFlag : class = %s, field name = %s", g.getClass().getSimpleName(), field.getName());
 				final DisupdateFlag disupdateFlag = field.getAnnotation(DisupdateFlag.class);
 				if ( disupdateFlag != null ) {
 					field.setAccessible(true);
