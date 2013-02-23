@@ -290,7 +290,6 @@ final public class GraphDB {
 	static void serializeFiledsOfGraphDocumentToPojo(final List<Property> propertyList, final ODocument doc, final GraphModel model) {
 		for ( final Property prop : propertyList ) {
 			if ( !prop.isGenerated ) {
-				prop.field.setAccessible(true);
 				try {
 					final Object obj = doc.field(prop.field.getName());
 					if ( obj instanceof OTrackedList ) {
