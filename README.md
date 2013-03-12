@@ -32,7 +32,7 @@ Install
 
   2)  Executing the command 
 
-         % git git@github.com:sgougi/play21-origami-plugin.git
+         % git clone git@github.com:sgougi/play21-origami-plugin.git
 
   3)  Publishing Origami to your local repository
 
