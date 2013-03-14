@@ -23,6 +23,7 @@ import com.wingnest.play2.origami.annotations.WithGraphDB;
 public class Application extends Controller {
 
 	public static Result index() {
+		routes.Application.getClass();
 		return ok(index.render());
 	}
 
