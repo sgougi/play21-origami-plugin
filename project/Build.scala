@@ -25,6 +25,7 @@ object ApplicationBuild extends Build {
   )
     
   val main = play.Project(appName, appVersion, appDependencies).settings(
+    publishArtifact in(Compile, packageDoc) := false,
     organization := "com.wingnest.play2",
     resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/public/"
   )
