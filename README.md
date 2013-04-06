@@ -23,12 +23,12 @@ Features
 Requirements
 =========
 
-* Only supports Play 2.1.0 or greater.
+* Play 2.1.1
 
 Install
 ====
 
-  1)  Install Play framework 2.1.0 and Java 5 or 6, 7
+  1)  Install Play framework 2.1.1 and Java 5 or 6, 7
 
   2)  Executing the command 
 
