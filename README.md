@@ -10,7 +10,7 @@ Features
 
 * Supports for both **Java** and **Scala** Project (Both Scala models and Java models are supported)
 
-* Supports for both the embedded OrientDB and remote OrientDB
+* Supports for both the embedded and remote OrientDB
 
 * Enables to customize the format of Model Id ([src](app/com/wingnest/play2/origami/IdManager.java))
 
