@@ -18,7 +18,7 @@ Features
 
    * Enables to use the [OrientDB Studio](https://github.com/nuvolabase/orientdb/wiki/OrientDB-Studio)
 
-   * Enables to make the database directory of the embedded OrientDB a zip file when your application has just started up.
+   * Enables to make the database directory of the embedded OrientDB a zip file when your application just starts up.
 
 Requirements
 =========
