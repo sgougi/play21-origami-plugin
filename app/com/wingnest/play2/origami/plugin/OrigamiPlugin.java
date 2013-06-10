@@ -48,6 +48,7 @@ import play.Plugin;
 
 import com.orientechnologies.orient.client.remote.OEngineRemote;
 import com.orientechnologies.orient.core.Orient;
+import com.orientechnologies.orient.core.config.OGlobalConfiguration;
 import com.orientechnologies.orient.core.db.ODatabaseListener;
 import com.orientechnologies.orient.core.db.graph.OGraphDatabase;
 import com.orientechnologies.orient.core.hook.ORecordHook;
@@ -96,6 +97,7 @@ final public class OrigamiPlugin extends Plugin {
 			if ( Orient.getHomePath() == null ) {
 				System.setProperty(Orient.ORIENTDB_HOME, ".");
 			}
+			OGlobalConfiguration.CACHE_LEVEL1_ENABLED.setValue(false);
 			configure();
 			serverStart();
 		}
