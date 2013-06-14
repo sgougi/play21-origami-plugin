@@ -12,6 +12,8 @@ Features
 
 * Supports for both the embedded and remote OrientDB
 
+* Supports for auto-reloading
+
 * Enables to customize the format of Model Id ([src](app/com/wingnest/play2/origami/IdManager.java))
 
 * On only embedded OrienDB:
@@ -24,7 +26,7 @@ Requirements
 =========
 
 * Play 2.1.1
-* OrientDB 1.4.0
+* OrientDB 1.4.1-SNAPSHOT
 
 Install
 ====
