@@ -26,7 +26,7 @@ Requirements
 =========
 
 * Play 2.1.1
-* OrientDB 1.4.1-SNAPSHOT
+* OrientDB 1.4.1
 
 Install
 ====
