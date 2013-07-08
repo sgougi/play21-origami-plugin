@@ -25,7 +25,7 @@ Features
 Requirements
 =========
 
-* Play 2.1.1
+* Play 2.1.2
 * OrientDB 1.4.1
 
 Install

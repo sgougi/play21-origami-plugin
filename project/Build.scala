@@ -5,7 +5,7 @@ import play.Project._
 object ApplicationBuild extends Build {
 
   val appName         = "play21-origami-plugin"
-  val appVersion      = "1.1.3"
+  val appVersion      = "1.1.4"
   val orientDBVersion = "1.4.1"
 
   val appDependencies = Seq(  
@@ -27,7 +27,7 @@ object ApplicationBuild extends Build {
     publishArtifact in(Compile, packageDoc) := false,
     organization := "com.wingnest.play2",
     resolvers += "Sonatype OSS Snapshot" at "https://oss.sonatype.org/content/repositories/snapshots",    
-    resolvers += "Sonatype" at "https://oss.sonatype.org/content/repositories/public/"      
+    resolvers += "Sonatype" at "https://oss.sonatype.org/content/repositories/public"
   )
 
 }
