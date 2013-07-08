@@ -31,7 +31,7 @@ Requirements
 Install
 ====
 
-  1)  Install Play framework 2.1.1 and Java 5 or 6, 7
+  1)  Install Play framework 2.1.2 and Java 5 or 6, 7
 
   2)  Executing the command 
 
