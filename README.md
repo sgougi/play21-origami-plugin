@@ -96,10 +96,10 @@ Defines one or more indexes.
 
          public class A extends ... {
             ...
-            @Index(OClass.INDEX_TYPE.UNIQUE)
+            @Index(indexType = OClass.INDEX_TYPE.UNIQUE)
             public String email;     
     
-            @Index(OClass.INDEX_TYPE.NOTUNIQUE)
+            @Index(indexType = OClass.INDEX_TYPE.NOTUNIQUE)
             public String name;     
            ...
          }
@@ -111,10 +111,10 @@ Defines one or more composite indexes.
 
         public class A extends ... {
             ...
-            @CompositeIndex(indexName="ci_1", OClass.INDEX_TYPE.UNIQUE)
+            @CompositeIndex(indexName="ci_1", indexType = OClass.INDEX_TYPE.UNIQUE)
             public String attr1;     
     
-            @CompositeIndex(indexName="ci_1", OClass.INDEX_TYPE.NOTUNIQUE)
+            @CompositeIndex(indexName="ci_1", indexType = OClass.INDEX_TYPE.NOTUNIQUE)
             public Integer attr2;
             ...
         }     
