@@ -23,5 +23,6 @@ public interface ConfigConsts {
 	static final String CONF_ORIENT_DB_CONFIG_FILE = "origami.orientdb.config.file";
 	static final String CONF_ORIENT_DB_WWW_PATH = "origami.orientdb.www.path";
 	static final String CONF_ENABLE_DB_BACKUP_AT_STARTUP = "origami.enable.db_backup_at_startup";
-
+	static final String CONF_ORIENT_DB_MODELS = "origami.orientdb.models";
+	
 }

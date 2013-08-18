@@ -25,13 +25,13 @@ Features
 Requirements
 =========
 
-* Play 2.1.2
-* OrientDB 1.4.1
+* Play 2.1.3
+* OrientDB 1.5.0
 
 Install
 ====
 
-  1)  Install Play framework 2.1.2 and Java 5 or 6, 7
+  1)  Install Play framework 2.1.3 and Java 5 or 6, 7
 
   2)  Executing the command 
 
@@ -69,7 +69,7 @@ The com.wingnest.play2.origami.[GraphDB](app/com/wingnest/play2/origami/GraphDB.
 * GraphDB.begin()
 * GraphDB.commit()
 * GraphDB.rollback()
-* GraphDB.asynchCommand()
+* GraphDB.asynchQuery()
 * GraphDB.synchCommand()
 * GraphDB.synchQuery()
 * GraphDB.synchQueryModel()

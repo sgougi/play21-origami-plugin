@@ -25,7 +25,6 @@ import javax.persistence.Transient;
 
 import com.wingnest.play2.origami.annotations.DisupdateFlag;
 import com.wingnest.play2.origami.annotations.SmartDate;
-import com.wingnest.play2.origami.plugin.OrigamiLogger;
 import com.wingnest.play2.origami.plugin.exceptions.OrigamiUnexpectedException;
 import com.wingnest.play2.origami.plugin.utils.GraphDBPropertyUtils;
 

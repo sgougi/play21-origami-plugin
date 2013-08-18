@@ -28,7 +28,6 @@ import com.wingnest.play2.origami.plugin.utils.GraphDBPropertyUtils.Property;
 
 import com.wingnest.play2.origami.IdManager.IdHandler;
 
-import com.orientechnologies.orient.core.command.OCommandRequest;
 import com.orientechnologies.orient.core.command.OCommandResultListener;
 import com.orientechnologies.orient.core.db.ODatabase;
 import com.orientechnologies.orient.core.db.ODatabaseListener;
@@ -39,6 +38,7 @@ import com.orientechnologies.orient.core.hook.ORecordHook;
 import com.orientechnologies.orient.core.id.ORID;
 import com.orientechnologies.orient.core.id.ORecordId;
 import com.orientechnologies.orient.core.record.impl.ODocument;
+import com.orientechnologies.orient.core.sql.OCommandSQL;
 import com.orientechnologies.orient.core.sql.query.OSQLAsynchQuery;
 import com.orientechnologies.orient.core.sql.query.OSQLSynchQuery;
 import com.orientechnologies.orient.core.tx.OTransaction.TXSTATUS;
@@ -138,29 +138,16 @@ final public class GraphDB {
 
 	// ////
 
-	@SuppressWarnings("unchecked")
-	public static <RET extends OCommandRequest> RET asynchCommand(final String query, final Object... params) {
-		return (RET) GraphDB.open().command(new OSQLAsynchQuery<ODocument>(query)).execute(params);
+	public static void asynchQuery(final String query, final OCommandResultListener iResultListener, final Object... params) {
+		GraphDB.open().command(new OSQLAsynchQuery<ODocument>(query, iResultListener)).execute(params);
 	}
 
-	@SuppressWarnings("unchecked")
-	public static <RET extends OCommandRequest> RET asynchCommand(final String query, final OCommandResultListener iResultListener, final Object... params) {
-		return (RET) GraphDB.open().command(new OSQLAsynchQuery<ODocument>(query, iResultListener)).execute(params);
+	public static void asynchQuery(final String query, final int iLimit, final OCommandResultListener iResultListener, final Object... params) {
+		GraphDB.open().command(new OSQLAsynchQuery<ODocument>(query, iLimit, iResultListener)).execute(params);
 	}
 
-	@SuppressWarnings("unchecked")
-	public static <RET extends OCommandRequest> RET asynchCommand(final String query, final int iLimit, final OCommandResultListener iResultListener, final Object... params) {
-		return (RET) GraphDB.open().command(new OSQLAsynchQuery<ODocument>(query, iLimit, iResultListener)).execute(params);
-	}
-
-	@SuppressWarnings("unchecked")
-	public static <RET extends OCommandRequest> RET synchCommand(final String query, final Object... params) {
-		return (RET) GraphDB.open().command(new OSQLSynchQuery<ODocument>(query)).execute(params);
-	}
-
-	@SuppressWarnings("unchecked")
-	public static <RET extends OCommandRequest> RET synchCommand(final String query, final int iLimit, final Object... params) {
-		return (RET) GraphDB.open().command(new OSQLSynchQuery<ODocument>(query, iLimit)).execute(params);
+	public static int synchCommand(final String sql, final Object... params) {
+		return GraphDB.open().command(new OCommandSQL(sql)).execute(params);
 	}
 
 	public static List<ODocument> synchQuery(final String query, final Object... params) {

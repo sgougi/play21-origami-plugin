@@ -67,6 +67,7 @@ import com.wingnest.play2.origami.annotations.DisupdateFlag;
 import com.wingnest.play2.origami.annotations.Index;
 import com.wingnest.play2.origami.plugin.exceptions.OrigamiUnexpectedException;
 import com.wingnest.play2.origami.plugin.utils.ZipCompressionUtils;
+import java.util.*;
 
 final public class OrigamiPlugin extends Plugin {
 
@@ -76,6 +77,7 @@ final public class OrigamiPlugin extends Plugin {
 	public static String url;
 	public static String user;
 	public static String passwd;
+	public static List<String> models;
 
 	final private Application application;
 	private static OServer server;
@@ -141,11 +143,17 @@ final public class OrigamiPlugin extends Plugin {
 		}
 	}
 
+	@SuppressWarnings("serial")
 	private static void configure() {
 		final Configuration c = Play.application().configuration();
 		url = c.getString(CONF_ORIENT_DB_URL, "memory:temp");
 		user = c.getString(CONF_ORIENT_DB_USER, "admin");
 		passwd = c.getString(CONF_ORIENT_DB_PASSWORD, "admin");
+		models = c.getStringList(CONF_ORIENT_DB_MODELS, new ArrayList<String>() {
+			{
+				add("models");
+			}
+		});	
 	}
 
 	private static void runEmbeddedOrientDB() {
@@ -203,9 +211,13 @@ final public class OrigamiPlugin extends Plugin {
 		try {
 			debug("Registering Graph Classes");
 
-			final Set<Class<GraphVertexModel>> vertexClasses = getSubTypesOf("models", GraphVertexModel.class);
-			@SuppressWarnings("rawtypes")
-			final Set<Class<GraphEdgeModel>> edgeClasses = getSubTypesOf("models", GraphEdgeModel.class);
+            final Set<Class<GraphVertexModel>> vertexClasses = new HashSet<Class<GraphVertexModel>>();
+            @SuppressWarnings("rawtypes")
+			final Set<Class<GraphEdgeModel>> edgeClasses = new HashSet<Class<GraphEdgeModel>>();
+            for (String pkg: models) {
+                vertexClasses.addAll(getSubTypesOf(pkg, GraphVertexModel.class));
+                edgeClasses.addAll(getSubTypesOf(pkg, GraphEdgeModel.class));
+            }			
 			@SuppressWarnings("unchecked")
 			final Collection<Class<?>> javaClasses = CollectionUtils.union(vertexClasses, edgeClasses);
 
