@@ -5,10 +5,10 @@ import play.Project._
 object ApplicationBuild extends Build {
 
   val appName         = "play21-origami-simple-scala-app"
-  val appVersion      = "1.1.5"
+  val appVersion      = "1.1.6"
 
   val appDependencies = Seq(
-    "com.wingnest.play2" % "play21-origami-plugin_2.10" % "1.1.5",
+    "com.wingnest.play2" % "play21-origami-plugin_2.10" % "1.1.6",
 //	"org.apache.httpcomponents" % "httpclient" % "4.2.2",
 	"commons-lang" % "commons-lang" % "2.6"
 //    javaCore
