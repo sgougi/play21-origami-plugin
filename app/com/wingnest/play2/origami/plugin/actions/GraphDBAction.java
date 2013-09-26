@@ -17,16 +17,17 @@ package com.wingnest.play2.origami.plugin.actions;
 
 import java.lang.annotation.Annotation;
 
+import play.libs.F.Promise;
 import play.mvc.Action;
-import play.mvc.Http;
-import play.mvc.Result;
+import play.mvc.Http.Context;
+import play.mvc.SimpleResult;
 
 final public class GraphDBAction extends Action<Annotation> {
 
 	@Override
-	public Result call(final Http.Context context) throws Throwable {
+	public Promise<SimpleResult> call(Context context) throws Throwable {
 		final TransactionHelper th = new TransactionHelper(context, this.configuration);
-		final Result res;
+		final Promise<SimpleResult> res;
 		try {
 			th.beforeInvocation();
 			res = delegate.call(context);
