@@ -8,19 +8,19 @@ Features
 
 * Object-Graph-Mapping of annotated model classes based on Object Oriented Inheritance([src](samples/origami-simple-app/app/models))
 
-* Supports for both **Java** and **Scala** Project (Both Scala models and Java models are supported)
+* Support for both **Java** and **Scala** Project (Both Scala models and Java models are supported)
 
-* Supports for both the embedded and remote OrientDB
+* Support for both the embedded and remote OrientDB
 
-* Supports for auto-reloading
+* Auto-reloading support
 
-* Enables to customize the format of Model Id ([src](app/com/wingnest/play2/origami/IdManager.java))
+* Support to enables to customize the format of Model Id ([src](app/com/wingnest/play2/origami/IdManager.java))
 
 * On only embedded OrienDB:
 
-   * Enables to use the [OrientDB Studio](https://github.com/nuvolabase/orientdb/wiki/OrientDB-Studio)
+   * Support to enables to use the [OrientDB Studio](https://github.com/nuvolabase/orientdb/wiki/OrientDB-Studio)
 
-   * Enables to make the database directory of the embedded OrientDB a zip file when your application just starts up.
+   * Support to enables to make the database directory of the embedded OrientDB a zip file when your application just starts up.
 
 Requirements
 =========
