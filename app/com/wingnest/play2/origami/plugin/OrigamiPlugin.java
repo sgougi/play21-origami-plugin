@@ -211,72 +211,17 @@ final public class OrigamiPlugin extends Plugin {
 		try {
 			debug("Registering Graph Classes");
 
-            final Set<Class<GraphVertexModel>> vertexClasses = new HashSet<Class<GraphVertexModel>>();
+            final Set<Class<?>> vertexClasses = new HashSet<Class<?>>();
             @SuppressWarnings("rawtypes")
-			final Set<Class<GraphEdgeModel>> edgeClasses = new HashSet<Class<GraphEdgeModel>>();
+			final Set<Class<?>> edgeClasses = new HashSet<Class<?>>();
             for (String pkg: models) {
                 vertexClasses.addAll(getSubTypesOf(pkg, GraphVertexModel.class));
                 edgeClasses.addAll(getSubTypesOf(pkg, GraphEdgeModel.class));
             }			
-			@SuppressWarnings("unchecked")
-			final Collection<Class<?>> javaClasses = CollectionUtils.union(vertexClasses, edgeClasses);
 
-			final Class<?>[] javaClassArray = javaClasses.toArray(new Class<?>[0]);
-			Arrays.sort(javaClassArray, new Comparator<Class<?>>() {
-				@Override
-				public int compare(Class<?> o1, Class<?> o2) {
-					if ( o1.equals(o2) )
-						return 0;
-					if ( o1.isAssignableFrom(o2) )
-						return -1;
-					if ( o2.isAssignableFrom(o1) )
-						return 1;
-					int o1cnt = calSuperclassCount(o1);
-					int o2cnt = calSuperclassCount(o2);
-					return (o1cnt - o2cnt);
-				}
-			});
+			maintainClasses(db, vertexClasses, true);
+			maintainClasses(db, edgeClasses, false);
 
-			javaClasses.clear();
-			javaClasses.addAll(Arrays.asList(javaClassArray));
-
-			final OSchema schema = db.getMetadata().getSchema();
-			for ( final Class<?> javaClass : javaClasses ) {
-				final String entityName = javaClass.getSimpleName();
-				final OClass oClass;
-				if ( GraphVertexModel.class.isAssignableFrom(javaClass) ) {
-					final String className = javaClass.getSimpleName();
-					debug("Entity: %s", className);
-					if ( schema.existsClass(className) ) {
-						oClass = schema.getClass(className);
-					} else {
-						oClass = db.createVertexType(className);
-					}
-					graphEntityMap.put(className, javaClass);
-					final Class<?> sclass = javaClass.getSuperclass();
-					if ( javaClasses.contains(sclass) ) {
-						final OClass sClass = db.getMetadata().getSchema().getClass(sclass.getSimpleName());
-						db.getMetadata().getSchema().getClass(entityName).setSuperClass(sClass);
-					}
-				} else if ( GraphEdgeModel.class.isAssignableFrom(javaClass) ) {
-					final String className = javaClass.getSimpleName();
-					debug("Entity: %s", className);
-					if ( schema.existsClass(className) ) {
-						oClass = schema.getClass(className);
-					} else {
-						oClass = db.createEdgeType(className);
-					}
-					graphEntityMap.put(className, javaClass);
-					final Class<?> sclass = javaClass.getSuperclass();
-					if ( javaClasses.contains(sclass) ) {
-						final OClass sClass = db.getMetadata().getSchema().getClass(sclass.getSimpleName());
-						db.getMetadata().getSchema().getClass(entityName).setSuperClass(sClass);
-					}
-				} else {
-					throw new IllegalStateException("bug!?");
-				}
-				maintainProperties(oClass, javaClass);
-			}
 			debug("Registering Database Listeners");
 			for ( final Class<? extends ODatabaseListener> listener : getSubTypesOf("listeners", ODatabaseListener.class) ) {
 				debug("Listener: %s", listener.getName());
@@ -293,6 +238,37 @@ final public class OrigamiPlugin extends Plugin {
 			db.close();
 		}
 	}
+	
+	private void maintainClasses(OGraphDatabase db , Set<Class<?>> javaClasses, boolean bForVertex) {
+		final OSchema schema = db.getMetadata().getSchema();
+		for ( final Class<?> javaClass : javaClasses ) {
+			final String entityName = javaClass.getSimpleName();
+			{
+				if ( !schema.existsClass(entityName) ) {
+					if(bForVertex) {
+						debug("Custom Vertex: %s", entityName);
+						db.createVertexType(entityName);
+					} else {
+						debug("Custom Edge: %s", entityName);
+						db.createEdgeType(entityName);
+					}					
+				}
+				graphEntityMap.put(entityName, javaClass);
+			}
+		}
+		for ( final Class<?> javaClass : javaClasses ) {
+			final String entityName = javaClass.getSimpleName();
+			final OClass oClass = schema.getClass(entityName);
+			OClass baseClass = bForVertex ? schema.getClass("V") : schema.getClass("E");
+			oClass.setSuperClass(baseClass);			
+			Class<?> sclass = javaClass.getSuperclass();
+			if ( javaClasses.contains(sclass) ) {
+				final OClass sClass = schema.getClass(sclass.getSimpleName());
+				oClass.setSuperClass(sClass);
+			}
+			maintainProperties(oClass, javaClass);										
+		}
+	}	
 
 	@SuppressWarnings("unchecked")
 	private <T> Set<Class<T>> getSubTypesOf(final String packageName, final Class<T> clazz) {
@@ -455,16 +431,6 @@ final public class OrigamiPlugin extends Plugin {
 
 	private String makeIndexName(final Class<?> javaClass, final Field field) {
 		return new StringBuffer().append(javaClass.getSimpleName()).append(".").append(field.getName()).toString();
-	}
-
-	private int calSuperclassCount(final Class<?> clazz) {
-		int cnt = 0;
-		Class<?> sc = clazz.getSuperclass();
-		while ( sc != null ) {
-			cnt++;
-			sc = sc.getSuperclass();
-		}
-		return cnt;
 	}
 
 }
