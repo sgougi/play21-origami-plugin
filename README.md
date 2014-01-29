@@ -42,7 +42,7 @@ Setup
          % cd play21-origami-plugin
          % play publish-local
 
-Runnning sample applications and Usage
+Running sample applications and Usage
 =======================
 
 At a command prompt, type the following commands:
