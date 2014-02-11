@@ -25,13 +25,13 @@ Features
 Requirements
 =========
 
-* Play 2.2.0
-* OrientDB 1.5.1
+* Play 2.2.1
+* OrientDB 1.6.4
 
 Install
 ====
 
-  1)  Install Play framework 2.2 and Java 5 or 6, 7
+  1)  Install Play framework 2.2.1 and Java 5 or 6, 7
 
   2)  Executing the command 
 

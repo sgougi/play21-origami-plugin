@@ -5,11 +5,14 @@ import play.Project._
 object ApplicationBuild extends Build {
 
   val appName         = "play21-origami-simple-scala-app"
-  val appVersion      = "1.2.1"
+  val appVersion      = "1.2.2"
 
   val appDependencies = Seq(
-    "com.wingnest.play2" % "play21-origami-plugin_2.10" % "1.2.1",
-//	"org.apache.httpcomponents" % "httpclient" % "4.2.2",
+    ("com.wingnest.play2" % "play21-origami-plugin_2.10" % "1.2.2")
+	    .exclude("com.orientechnologies", "orientdb-object"),
+	    
+	"javax.persistence" % "persistence-api" % "1.0-rev-1",	
+
 	"commons-lang" % "commons-lang" % "2.6"
 //    javaCore
   )
