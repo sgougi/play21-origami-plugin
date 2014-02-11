@@ -28,7 +28,7 @@ Requirements
 * Play 2.2.1
 * OrientDB 1.6.4
 
-Install
+Installing
 ====
 
   1)  Install Play framework 2.2.1 and Java 5 or 6, 7
@@ -42,7 +42,7 @@ Install
          % cd play21-origami-plugin
          % play publish-local
 
-Run sample application and Usage
+Running sample application and Usage
 =======================
 
 At a command prompt, type the following commands:
