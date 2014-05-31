@@ -371,8 +371,8 @@ final public class OrigamiPlugin extends Plugin {
 				deleteIndex(oClass, cindexName, classIndexCache, compositeIndexCache);
 			} else if ( oindex == null ) {
 				debug("create composite index : %s", cindexName);
+                                oClass.createIndex(cindexName, (OClass.INDEX_TYPE) ci.get("indexType"), fieldNames);
 			}
-			oClass.createIndex(cindexName, (OClass.INDEX_TYPE) ci.get("indexType"), fieldNames);
 			wkCurIndexNames.remove(cindexName);
 		}
 
