@@ -5,8 +5,8 @@ import play.Project._
 object ApplicationBuild extends Build {
 
   val appName         = "play21-origami-plugin"
-  val appVersion      = "1.2.2"
-  val orientDBVersion = "1.6.4"
+  val appVersion      = "1.2.3"
+  val orientDBVersion = "1.6.6"
 
   val appDependencies = Seq(  
     "com.orientechnologies" % "orientdb-core" % {orientDBVersion} excludeAll(
@@ -21,7 +21,6 @@ object ApplicationBuild extends Build {
     "com.orientechnologies" % "orientdb-distributed" % {orientDBVersion},
     
 	"javax.persistence" % "persistence-api" % "1.0-rev-1",
-
             
     "com.hazelcast" % "hazelcast" % "3.1",    
     "org.javassist" % "javassist" % "3.18.1-GA",

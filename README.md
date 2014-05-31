@@ -26,7 +26,7 @@ Requirements
 =========
 
 * Play 2.2.1
-* OrientDB 1.6.4
+* OrientDB 1.6.6
 
 Installing
 ====
@@ -160,7 +160,7 @@ The **@WithGraphDB** annotation enables annotated Actions and/or Controllers to 
 
 Known Issues
 =============
-* Nothing
+* [Issues in GitHub](https://github.com/sgougi/play21-origami-plugin/issues?state=open)
 
 Licence
 ========
