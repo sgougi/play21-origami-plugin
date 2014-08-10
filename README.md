@@ -26,7 +26,7 @@ Requirements
 =========
 
 * Play 2.2.1
-* OrientDB 1.6.6
+* OrientDB 1.6.6; See:[OrientDB 1.7 -> OGraphDatabase will be removed. What ?!?!](https://groups.google.com/forum/#!topic/orient-database/oFYb96sM7Jg)
 
 Installing
 ====
