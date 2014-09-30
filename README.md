@@ -114,7 +114,7 @@ Defines one or more composite indexes.
             @CompositeIndex(indexName="ci_1", indexType = OClass.INDEX_TYPE.UNIQUE)
             public String attr1;     
     
-            @CompositeIndex(indexName="ci_1", indexType = OClass.INDEX_TYPE.NOTUNIQUE)
+            @CompositeIndex(indexName="ci_1")
             public Integer attr2;
             ...
         }     
